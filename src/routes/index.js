@@ -1,17 +1,12 @@
-//@ts-check
 import * as React from "react";
-import { StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
 import IconMaterial from "react-native-vector-icons/MaterialIcons";
-// import Produtos from './Produtos/produtos'
-//import LinearGradient from 'react-native-linear-gradient';
 
 // importando páginas
 import Home from "../pages/Home";
-import ManageFoods from "../components/Foods/manageFoods";
-import ManageDrinks from "../components/Drinks/manageDrinks";
-import Notifications from "../pages/Notifications";
+import Save from "../pages/Save";
+import ListPizza from "../pages/ListPizza";
 
 const Tab = createBottomTabNavigator();
 
@@ -53,9 +48,8 @@ export default function Routes() {
       })}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Bebidas" component={ManageDrinks} />
-      <Tab.Screen name="Alimentos" component={ManageFoods} />
-      <Tab.Screen name="Notificações" component={Notifications} />
+      <Tab.Screen name="Bebidas" component={ListPizza} />
+      <Tab.Screen name="Salvar" component={Save} />
     </Tab.Navigator>
   );
 }
