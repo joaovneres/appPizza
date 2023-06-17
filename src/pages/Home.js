@@ -1,40 +1,34 @@
+import { useNavigation } from "@react-navigation/core";
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity } from "react-native";
 import * as Animatable from "react-native-animatable";
-import Carousel from 'react-native-snap-carousel';
-
-const CarouselScreen = () => {
-  const data = [
-    { id: 1, image: 'https://www.circuitodenoticias.com.br/up/img/1605108003.jpeg' },
-    { id: 2, image: 'https://pizzariabaggio.com.br//wp-content/uploads/2022/07/27-JUL-2022-Promoc%CC%A7a%CC%83o-Combo-Site-1-1024x444.jpg' },
-    { id: 3, image: 'https://static.wixstatic.com/media/6e4feb_74c4ab0444b7413db81e878ecfd6a2f7~mv2.png/v1/fill/w_548,h_548,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/C%C3%B3pia%20de%20combo%20promocional.png' },
-  ];
-
-  const renderItem = ({ item }) => {
-    return (
-      <View style={styles.slide}>
-        <Image source={{ uri: item.image }} style={styles.image} />
-      </View>
-    );
-  };
-
-  return (
-    <View style={styles.carouselContainer}>
-      <Carousel
-        data={data}
-        renderItem={renderItem}
-        sliderWidth={400}
-        itemWidth={300}
-      />
-    </View>
-  );
-};
 
 export default function Home() {
+  const navigation = useNavigation();
+
+  const images = [
+    'https://www.estrelapizza.com.br/wp-content/uploads/2017/08/banner-1-1.jpg',
+    'https://img.freepik.com/psd-gratuitas/menu-de-comida-e-modelo-de-banner-da-web-de-pizza-deliciosa_106176-419.jpg',
+    'https://veracepizza.com.br/rp/wp-content/uploads/2022/02/4221027_VERACE_BANNERS_PROMO-VERACE_MF_2.03-1-1-1200x923.png',
+  ];
+
   return (
     <View style={styles.container}>
+      <Text style={[styles.title, { marginTop: 20, color: "#080303" }]}>
+        Promoções da semana!
+      </Text>
       <View style={styles.containerLogo}>
-        <CarouselScreen />
+        <FlatList
+          data={images}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.slide}>
+              <Image source={{ uri: item }} style={styles.image} />
+            </View>
+          )}
+        />
       </View>
       <Animatable.View
         delay={600}
@@ -44,6 +38,11 @@ export default function Home() {
         <Text style={styles.title}>
           Pizzaria Delícias, a melhor pizza da região!
         </Text>
+        <TouchableOpacity onPress={() => { navigation.navigate('Pizzas') }}>
+          <Text style={[styles.title, { marginTop: 8, fontSize: 20 }]}>
+            Veja nosso cardápio
+          </Text>
+        </TouchableOpacity>
       </Animatable.View>
     </View>
   );
@@ -52,10 +51,10 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FAFBFA",
+    backgroundColor: "#fff",
   },
   containerLogo: {
-    flex: 1.5,
+    flex: 1.3,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -66,8 +65,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     paddingStart: "5%",
     paddingEnd: "5%",
-    marginLeft: "2%",
-    marginRight: "2%",
     alignItems: "center",
   },
   title: {
@@ -81,20 +78,17 @@ const styles = StyleSheet.create({
   text: {
     color: "#a1a1a1",
   },
-  carouselContainer: {
-    alignItems: 'center',
-    width: 400,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  },
   slide: {
-    width: 300,
+    width: 370,
     height: 300,
-    backgroundColor: '#ccc',
+    borderRadius: 10,
+    overflow: "hidden",
+    marginHorizontal: 10,
+    marginVertical: 30
   },
   image: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
 });

@@ -1,7 +1,6 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Icon from "react-native-vector-icons/Ionicons";
-import IconMaterial from "react-native-vector-icons/MaterialIcons";
 
 // importando páginas
 import Home from "../pages/Home";
@@ -30,14 +29,7 @@ export default function Routes() {
               iconName = "home";
               break;
             case "Pizzas":
-              iconName = "cafe-sharp";
-              break;
-            case "Alimentos":
-              return (
-                <IconMaterial name={"bakery-dining"} size={35} color={color} />
-              );
-            case "Notificações":
-              iconName = "notifications";
+              iconName = "pizza";
               break;
             default:
               iconName = "add-circle-outline";

@@ -29,11 +29,11 @@ export default function ListPizza() {
   };
 
   return (
-    <View >
-      <Text style={style.textTitle}>Bebidas</Text>
+    <View style={{ backgroundColor: "#fff", flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text style={style.textTitle}>Cardápio</Text>
 
       {loading ? (
-        <ActivityIndicator color="#121212" size={45} />
+        <ActivityIndicator color="#FF4C46" size={45} />
       ) : (
         <FlatList
           keyExtractor={(item) => item.key}
@@ -43,6 +43,7 @@ export default function ListPizza() {
               data={item}
               deleteItem={handleDelete}
               editItem={handleEdit}
+              setStatus={setLoading}
             />
           )}
         />
@@ -58,8 +59,14 @@ const style = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     alignSelf: 'center',
-    color: "#33503d",
+    color: "#080303",
     marginBottom: 10,
     marginTop: 20,
   },
+  container: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+
+  }
 })

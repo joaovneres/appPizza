@@ -1,9 +1,10 @@
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
-export default function DeletePizza({ open, onClose, onDeletePizza, pizza }) {
+export default function DeletePizza({ open, onClose, onDeletePizza, setStatus, pizza }) {
   if (!pizza) {
     return null;
   }
   const handleDelete = () => {
+    setStatus(true)
     onDeletePizza(pizza);
     onClose();
   };
@@ -14,25 +15,25 @@ export default function DeletePizza({ open, onClose, onDeletePizza, pizza }) {
       transparent={true}
       visible={open}
       onClose={onClose}
-      onRequestClose={() => setModalActive(false)}
+      onRequestClose={() => onClose(false)}
     >
       <View style={styles.outerView}>
         <View style={styles.modalView}>
-          <Text style={[styles.modalText, { fontSize: 18 }]}>
-            Deseja remover a bebida:
+          <Text style={[styles.modalText, { fontSize: 20 }]}>
+            Deseja remover a pizza:
           </Text>
-          <Text style={styles.modalText}>Nome: {pizza.name}</Text>
+          <Text style={styles.modalText}>Nome: {pizza.flavor}</Text>
           <Text style={styles.modalText}>Preço(R$): {pizza.price}</Text>
-          <Text style={styles.modalText}>Tamanho: {pizza.description}</Text>
+          <Text style={styles.modalText}>Ingredientes: {pizza.ingredients}</Text>
           <View style={[styles.cardAction, { marginTop: 10 }]}>
             <TouchableOpacity
-              style={[styles.cardButton, { backgroundColor: "#9C4744" }]}
+              style={[styles.cardButton, { backgroundColor: "#FF4C46" }]}
               onPress={onClose}
             >
               <Text style={styles.buttonTextModal}>Não</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.cardButton, { backgroundColor: "#33503d" }]}
+              style={[styles.cardButton, { backgroundColor: "#15BF4E" }]}
               onPress={handleDelete}
             >
               <Text style={styles.buttonTextModal}>Sim</Text>
@@ -45,11 +46,18 @@ export default function DeletePizza({ open, onClose, onDeletePizza, pizza }) {
 }
 
 const styles = StyleSheet.create({
+  outerView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
   modalView: {
-    backgroundColor: "#FAFBFA",
+    backgroundColor: "#fff",
     borderRadius: 30,
-    padding: 30,
-    width: 250,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+    width: 300,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -60,13 +68,27 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
-    color: "#33503d",
+    color: "#080303",
     fontWeight: "bold",
-    fontSize: 15,
-    marginVertical: 2,
+    fontSize: 18,
+    marginVertical: 2
   },
   buttonTextModal: {
     color: "#FFF",
-    fontSize: 15,
+    fontSize: 17,
+    fontWeight: "bold"
+  },
+
+  cardAction: {
+    alignItems: "center",
+    flexDirection: "row",
+  },
+  cardButton: {
+    width: "47%",
+    borderRadius: 50,
+    paddingVertical: 7,
+    marginTop: 2,
+    marginHorizontal: "1%",
+    alignItems: "center",
   },
 });
