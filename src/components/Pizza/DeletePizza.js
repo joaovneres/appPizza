@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Modal } from "react-native";
+import { View, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 export default function DeletePizza({ open, onClose, onDeletePizza, pizza }) {
   if (!pizza) {
     return null;

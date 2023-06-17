@@ -15,7 +15,7 @@ export default function Routes() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: "#495e4b",
+        tabBarActiveTintColor: "#FF4C46",
         tabBarInactiveTintColor: "#777",
         tabBarStyle: [
           {
@@ -29,7 +29,7 @@ export default function Routes() {
             case "Home":
               iconName = "home";
               break;
-            case "Bebidas":
+            case "Pizzas":
               iconName = "cafe-sharp";
               break;
             case "Alimentos":
@@ -48,7 +48,7 @@ export default function Routes() {
       })}
     >
       <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Bebidas" component={ListPizza} />
+      <Tab.Screen name="Pizzas" component={ListPizza} />
       <Tab.Screen name="Salvar" component={Save} />
     </Tab.Navigator>
   );

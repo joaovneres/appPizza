@@ -1,19 +1,43 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Text, View, FlatList, ActivityIndicator } from "react-native";
+import { Text, View, FlatList, ActivityIndicator, StyleSheet } from "react-native";
 import CardPizza from "../components/Pizza/CardPizza";
+import { list, remove, update } from "../services/connectionFirebase";
 export default function ListPizza() {
+
+  const [pizzas, setPizzas] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function findPizzas() {
+    await list('pizzas', setPizzas);
+    if (pizzas.length > 0) {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    findPizzas();
+  }, [pizzas.length]);
+
+  const handleDelete = (pizza) => {
+    remove(pizza.id, 'pizzas');
+    setPizzas([]);
+  };
+
+  const handleEdit = (newPizza, id) => {
+    update(id, newPizza, 'pizzas');
+    setPizzas([]);
+  };
+
   return (
-    <View style={style.list}>
+    <View >
       <Text style={style.textTitle}>Bebidas</Text>
 
       {loading ? (
         <ActivityIndicator color="#121212" size={45} />
       ) : (
         <FlatList
-          horizontal
           keyExtractor={(item) => item.key}
-          showsHorizontalScrollIndicator={false}
-          data={drinks}
+          data={pizzas}
           renderItem={({ item }) => (
             <CardPizza
               data={item}
@@ -26,3 +50,16 @@ export default function ListPizza() {
     </View>
   );
 }
+
+const style = StyleSheet.create({
+
+  textTitle: {
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+    alignSelf: 'center',
+    color: "#33503d",
+    marginBottom: 10,
+    marginTop: 20,
+  },
+})

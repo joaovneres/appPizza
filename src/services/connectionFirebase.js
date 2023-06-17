@@ -8,12 +8,12 @@ import { Slide, toast } from "react-toastify";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDUKr5rc-P0n6jcP38hXX3IifkXvDYkbcU",
-  authDomain: "dbfateclibrary-13c29.firebaseapp.com",
-  projectId: "dbfateclibrary-13c29",
-  storageBucket: "dbfateclibrary-13c29.appspot.com",
-  messagingSenderId: "786229904215",
-  appId: "1:786229904215:web:78bdf1fe29414db0183412",
+  apiKey: "AIzaSyAgL1hS4-Rz7PkHruWrYxnDxFmYNML_CMo",
+  authDomain: "db-pizzaria.firebaseapp.com",
+  projectId: "db-pizzaria",
+  storageBucket: "db-pizzaria.appspot.com",
+  messagingSenderId: "442928207060",
+  appId: "1:442928207060:web:76940883549e7df687d741"
 };
 
 if (!firebase.apps.lenght) {

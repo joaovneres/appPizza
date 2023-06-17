@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.21.0",
+    "@expo/webpack-config": "^18.0.1",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
+    "deprecated-react-native-prop-types": "^4.1.0",
     "expo": "~48.0.6",
     "expo-status-bar": "~1.4.4",
     "firebase": "^9.18.0",
