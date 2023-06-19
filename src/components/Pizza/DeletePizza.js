@@ -27,13 +27,13 @@ export default function DeletePizza({ open, onClose, onDeletePizza, setStatus, p
           <Text style={styles.modalText}>Ingredientes: {pizza.ingredients}</Text>
           <View style={[styles.cardAction, { marginTop: 10 }]}>
             <TouchableOpacity
-              style={[styles.cardButton, { backgroundColor: "#FF4C46" }]}
+              style={[styles.cardButton, { backgroundColor: "#E85333" }]}
               onPress={onClose}
             >
               <Text style={styles.buttonTextModal}>Não</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.cardButton, { backgroundColor: "#15BF4E" }]}
+              style={[styles.cardButton, { backgroundColor: "#827E80" }]}
               onPress={handleDelete}
             >
               <Text style={styles.buttonTextModal}>Sim</Text>

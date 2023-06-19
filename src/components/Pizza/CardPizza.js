@@ -30,13 +30,13 @@ export default function CardPizza({ data, deleteItem, editItem, setStatus }) {
         </Card.Content>
         <Card.Actions style={styles.cardAction}>
           <TouchableOpacity
-            style={[styles.cardButton, { backgroundColor: "#FF4C46" }]}
+            style={[styles.cardButton, { backgroundColor: "#E85333" }]}
             onPress={() => setModalActive(true)}
           >
             <Text style={styles.buttonText}>Excluir</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.cardButton, { backgroundColor: "#2BA1FF" }]}
+            style={[styles.cardButton, { backgroundColor: "#827E80" }]}
             onPress={() => setOpen(true)}
           >
             <Text style={styles.buttonText}>Editar</Text>
@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingBottom: 2,
     width: item_width,
-    alignItems: "center",
   },
   titleCard: {
     fontSize: 20,
@@ -77,6 +76,7 @@ const styles = StyleSheet.create({
   image: {
     height: item_width * 0.9,
     width: item_width * 0.9,
+    alignSelf: "center"
   },
   textPrice: {
     fontSize: 20,

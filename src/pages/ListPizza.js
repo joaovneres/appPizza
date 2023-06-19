@@ -36,10 +36,11 @@ export default function ListPizza() {
         <ActivityIndicator color="#FF4C46" size={45} />
       ) : (
         <FlatList
-          keyExtractor={(item) => item.key}
+          keyExtractor={(item) => item.id}
           data={pizzas}
           renderItem={({ item }) => (
             <CardPizza
+              key={item.id}
               data={item}
               deleteItem={handleDelete}
               editItem={handleEdit}

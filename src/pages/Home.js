@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.title, { marginTop: 20, color: "#080303" }]}>
+      <Text style={[styles.title, { marginTop: 30, marginBottom: 0, color: "#080303" }]}>
         Promoções da semana!
       </Text>
       <View style={styles.containerLogo}>
@@ -38,8 +38,8 @@ export default function Home() {
         <Text style={styles.title}>
           Pizzaria Delícias, a melhor pizza da região!
         </Text>
-        <TouchableOpacity onPress={() => { navigation.navigate('Pizzas') }}>
-          <Text style={[styles.title, { marginTop: 8, fontSize: 20 }]}>
+        <TouchableOpacity style={styles.button} onPress={() => { navigation.navigate('Pizzas') }}>
+          <Text style={styles.buttonText}>
             Veja nosso cardápio
           </Text>
         </TouchableOpacity>
@@ -60,11 +60,10 @@ const styles = StyleSheet.create({
   },
   containerForm: {
     flex: 1,
-    backgroundColor: "#FF4C46",
+    backgroundColor: "#E85333",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    paddingStart: "5%",
-    paddingEnd: "5%",
+    paddingHorizontal: '6%',
     alignItems: "center",
   },
   title: {
@@ -74,9 +73,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: "#FAFBFA",
     textAlign: "center",
-  },
-  text: {
-    color: "#a1a1a1",
   },
   slide: {
     width: 370,
@@ -90,5 +86,19 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "cover",
+  },
+  button: {
+    marginTop: 10,
+    borderRadius: 50,
+    paddingVertical: 7,
+    paddingHorizontal: 15,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff"
+  },
+  buttonText: {
+    color: "#E85333",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
