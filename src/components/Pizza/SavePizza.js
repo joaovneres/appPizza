@@ -9,6 +9,13 @@ const SavePizza = ({ open, onClose, onUpdatePizza, pizza }) => {
     const [price, setPrice] = useState(pizza.price.toString());
     const inputRef = useRef(null);
 
+    useEffect(() => {
+        setFlavor(pizza.flavor);
+        setImage(pizza.image);
+        setCategory(pizza.category);
+        setIngredients(pizza.ingredients);
+        setPrice(pizza.price.toString());
+    }, [open]);
 
     const handleUpdatePizza = () => {
         const newPizza = {
@@ -18,7 +25,7 @@ const SavePizza = ({ open, onClose, onUpdatePizza, pizza }) => {
             ingredients,
             price
         };
-        onUpdatePizza(newPizza);
+        onUpdatePizza(newPizza, pizza.id);
         setFlavor('');
         setImage('');
         setCategory('');
@@ -31,64 +38,63 @@ const SavePizza = ({ open, onClose, onUpdatePizza, pizza }) => {
             animationType="fade"
             transparent={true}
             visible={open}
-            onClose={onClose}
-            onRequestClose={() => onClose(false)}
+            onRequestClose={onClose}
         >
-            <View style={style.outerView}>
-                <SafeAreaView style={style.modalView}>
-                    <Text style={style.textTitle}>
-                        Atualizar pizza
-                    </Text>
-                    <TextInput
-                        placeholder='Sabor'
-                        style={style.input}
-                        value={flavor}
-                        onChangeText={(text) => setFlavor(text)}
-                        ref={inputRef}
-                    />
-                    <TextInput
-                        placeholder='Ingredientes'
-                        style={[style.input,]}
-                        value={ingredients}
-                        onChangeText={(text) => setIngredients(text)}
-                        ref={inputRef}
-                    />
-                    <View style={style.conjunInput}>
+            <TouchableOpacity style={styles.modalBackground} activeOpacity={1} onPress={onClose}>
+                <View style={styles.outerView}>
+                    <SafeAreaView style={styles.modalView}>
+                        <Text style={styles.textTitle}>Atualizar pizza</Text>
                         <TextInput
-                            placeholder='Preço'
-                            style={[style.input, { width: "47%" }]}
-                            value={price}
-                            onChangeText={(text) => setPrice(text)}
+                            placeholder='Sabor'
+                            style={styles.input}
+                            value={flavor}
+                            onChangeText={(text) => setFlavor(text)}
                             ref={inputRef}
                         />
                         <TextInput
-                            placeholder='Categoria'
-                            style={[style.input, { width: "47%" }]}
-                            value={category}
-                            onChangeText={(text) => setCategory(text)}
+                            placeholder='Ingredientes'
+                            style={[styles.input,]}
+                            value={ingredients}
+                            onChangeText={(text) => setIngredients(text)}
                             ref={inputRef}
                         />
-                    </View>
+                        <View style={styles.conjunInput}>
+                            <TextInput
+                                placeholder='Preço'
+                                style={[styles.input, { width: "47%" }]}
+                                value={price}
+                                onChangeText={(text) => setPrice(text)}
+                                ref={inputRef}
+                            />
+                            <TextInput
+                                placeholder='Categoria'
+                                style={[styles.input, { width: "47%" }]}
+                                value={category}
+                                onChangeText={(text) => setCategory(text)}
+                                ref={inputRef}
+                            />
+                        </View>
 
-                    <View style={style.conjunInput}>
-                        <TextInput
-                            placeholder='Imagem'
-                            style={style.input}
-                            value={image}
-                            onChangeText={(text) => setImage(text)}
-                            ref={inputRef}
-                        />
-                    </View>
-                    <TouchableOpacity style={style.button} onPress={handleUpdatePizza}>
-                        <Text style={style.buttonText}>Salvar</Text>
-                    </TouchableOpacity>
-                </SafeAreaView>
-            </View>
+                        <View style={styles.conjunInput}>
+                            <TextInput
+                                placeholder='Imagem'
+                                style={styles.input}
+                                value={image}
+                                onChangeText={(text) => setImage(text)}
+                                ref={inputRef}
+                            />
+                        </View>
+                        <TouchableOpacity style={styles.button} onPress={handleUpdatePizza}>
+                            <Text style={styles.buttonText}>Salvar</Text>
+                        </TouchableOpacity>
+                    </SafeAreaView>
+                </View>
+            </TouchableOpacity>
         </Modal>
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     textTitle: {
         fontSize: 30,
         fontWeight: "bold",
@@ -103,7 +109,7 @@ const style = StyleSheet.create({
         marginBottom: 3,
         marginHorizontal: 5,
         backgroundColor: '#fff',
-        borderRadius: 4,
+        borderRadius: 100,
         height: 50,
         width: 335,
         padding: 10,
@@ -117,7 +123,7 @@ const style = StyleSheet.create({
         flexDirection: "row"
     },
     button: {
-        backgroundColor: "#15BF4E",
+        backgroundColor: "#E85333",
         width: 200,
         borderRadius: 50,
         paddingVertical: 15,
@@ -134,7 +140,6 @@ const style = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(0,0,0,0.5)",
     },
     modalView: {
         backgroundColor: "#fff",
@@ -171,6 +176,12 @@ const style = StyleSheet.create({
         marginHorizontal: "1%",
         alignItems: "center",
     },
-})
+    modalBackground: {
+        flex: 1,
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        justifyContent: "center",
+        alignItems: "center"
+    }
+});
 
 export default SavePizza;

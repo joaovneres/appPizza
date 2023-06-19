@@ -29,7 +29,7 @@ export default function ListPizza() {
   };
 
   return (
-    <View style={{ backgroundColor: "#fff", flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={style.container}>
       <Text style={style.textTitle}>Cardápio</Text>
 
       {loading ? (
@@ -54,7 +54,12 @@ export default function ListPizza() {
 }
 
 const style = StyleSheet.create({
-
+  container: {
+    backgroundColor: "#fff",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   textTitle: {
     fontSize: 30,
     fontWeight: "bold",
@@ -62,12 +67,6 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     color: "#080303",
     marginBottom: 10,
-    marginTop: 20,
+    marginTop: 35,
   },
-  container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-
-  }
 })

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView, TextInput, StyleSheet } from "react-native";
+import { create } from "../services/connectionFirebase";
 export default function Save() {
   const [flavor, setFlavor] = useState("");
   const [image, setImage] = useState("");
@@ -9,7 +10,7 @@ export default function Save() {
   const inputRef = useRef(null);
 
 
-  const handleUpdatePizza = () => {
+  const handleRegisterPizza = () => {
     const newPizza = {
       flavor,
       image,
@@ -17,7 +18,7 @@ export default function Save() {
       ingredients,
       price
     };
-    onUpdatePizza(newPizza);
+    create("pizzas", newPizza)
     setFlavor('');
     setImage('');
     setCategory('');
@@ -38,38 +39,33 @@ export default function Save() {
       />
       <TextInput
         placeholder='Ingredientes'
-        style={[style.input,]}
+        style={style.input}
         value={ingredients}
         onChangeText={(text) => setIngredients(text)}
         ref={inputRef}
       />
-      <View style={style.conjunInput}>
-        <TextInput
-          placeholder='Preço'
-          style={[style.input, { width: "47%" }]}
-          value={price}
-          onChangeText={(text) => setPrice(text)}
-          ref={inputRef}
-        />
-        <TextInput
-          placeholder='Categoria'
-          style={[style.input, { width: "47%" }]}
-          value={category}
-          onChangeText={(text) => setCategory(text)}
-          ref={inputRef}
-        />
-      </View>
-
-      <View style={style.conjunInput}>
-        <TextInput
-          placeholder='Imagem'
-          style={style.input}
-          value={image}
-          onChangeText={(text) => setImage(text)}
-          ref={inputRef}
-        />
-      </View>
-      <TouchableOpacity style={style.button} onPress={handleUpdatePizza}>
+      <TextInput
+        placeholder='Preço'
+        style={style.input}
+        value={price}
+        onChangeText={(text) => setPrice(text)}
+        ref={inputRef}
+      />
+      <TextInput
+        placeholder='Categoria'
+        style={style.input}
+        value={category}
+        onChangeText={(text) => setCategory(text)}
+        ref={inputRef}
+      />
+      <TextInput
+        placeholder='Imagem'
+        style={style.input}
+        value={image}
+        onChangeText={(text) => setImage(text)}
+        ref={inputRef}
+      />
+      <TouchableOpacity style={style.button} onPress={handleRegisterPizza}>
         <Text style={style.buttonText}>Salvar</Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -98,7 +94,7 @@ const style = StyleSheet.create({
     marginBottom: 3,
     marginHorizontal: 5,
     backgroundColor: '#fff',
-    borderRadius: 4,
+    borderRadius: 100,
     height: 50,
     width: 335,
     padding: 10,
@@ -112,7 +108,7 @@ const style = StyleSheet.create({
     flexDirection: "row"
   },
   button: {
-    backgroundColor: "#37AB3E",
+    backgroundColor: "#E85333",
     width: 200,
     borderRadius: 50,
     paddingVertical: 15,

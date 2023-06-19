@@ -17,30 +17,32 @@ export default function DeletePizza({ open, onClose, onDeletePizza, setStatus, p
       onClose={onClose}
       onRequestClose={() => onClose(false)}
     >
-      <View style={styles.outerView}>
-        <View style={styles.modalView}>
-          <Text style={[styles.modalText, { fontSize: 20 }]}>
-            Deseja remover a pizza:
-          </Text>
-          <Text style={styles.modalText}>Nome: {pizza.flavor}</Text>
-          <Text style={styles.modalText}>Preço(R$): {pizza.price}</Text>
-          <Text style={styles.modalText}>Ingredientes: {pizza.ingredients}</Text>
-          <View style={[styles.cardAction, { marginTop: 10 }]}>
-            <TouchableOpacity
-              style={[styles.cardButton, { backgroundColor: "#E85333" }]}
-              onPress={onClose}
-            >
-              <Text style={styles.buttonTextModal}>Não</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.cardButton, { backgroundColor: "#827E80" }]}
-              onPress={handleDelete}
-            >
-              <Text style={styles.buttonTextModal}>Sim</Text>
-            </TouchableOpacity>
+      <TouchableOpacity style={styles.modalBackground} activeOpacity={1} onPress={onClose}>
+        <View style={styles.outerView}>
+          <View style={styles.modalView}>
+            <Text style={[styles.modalText, { fontSize: 20, textAlign: "center", fontWeight: "bold", marginBottom: 15 }]}>
+              Deseja remover a pizza?
+            </Text>
+            <Text style={styles.modalText}><Text style={[styles.modalText, { fontWeight: "bold", }]}>Nome:</Text> {pizza.flavor}</Text>
+            <Text style={styles.modalText}><Text style={[styles.modalText, { fontWeight: "bold", }]}>Preço(R$):</Text> {pizza.price}</Text>
+            <Text style={styles.modalText}><Text style={[styles.modalText, { fontWeight: "bold", }]}>Ingredientes:</Text> {pizza.ingredients}</Text>
+            <View style={styles.cardAction}>
+              <TouchableOpacity
+                style={[styles.cardButton, { backgroundColor: "#E85333" }]}
+                onPress={onClose}
+              >
+                <Text style={styles.buttonTextModal}>Não</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.cardButton, { backgroundColor: "#827E80" }]}
+                onPress={handleDelete}
+              >
+                <Text style={styles.buttonTextModal}>Sim</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     </Modal>
   );
 }
@@ -50,13 +52,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalView: {
     backgroundColor: "#fff",
     borderRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingTop: 20,
+    paddingBottom: 30,
     width: 300,
     shadowColor: "#000",
     shadowOffset: {
@@ -69,7 +71,6 @@ const styles = StyleSheet.create({
   },
   modalText: {
     color: "#080303",
-    fontWeight: "bold",
     fontSize: 18,
     marginVertical: 2
   },
@@ -78,10 +79,10 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "bold"
   },
-
   cardAction: {
     alignItems: "center",
     flexDirection: "row",
+    marginTop: 20
   },
   cardButton: {
     width: "47%",
@@ -91,4 +92,10 @@ const styles = StyleSheet.create({
     marginHorizontal: "1%",
     alignItems: "center",
   },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center"
+  }
 });

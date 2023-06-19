@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
+import { update } from "../../services/connectionFirebase";
 import DeletePizza from "./DeletePizza";
 import SavePizza from "./SavePizza";
 
@@ -26,7 +27,7 @@ export default function CardPizza({ data, deleteItem, editItem, setStatus }) {
         <Card.Cover source={{ uri: data.image }} style={styles.image} />
         <Card.Content>
           <Text style={styles.textPrice}>R$ {data.price}</Text>
-          <Text style={styles.textCard}>Tamanho: {data.quantity}</Text>
+          <Text style={styles.textCard}><Text>Ingredientes:</Text> {data.ingredients}</Text>
         </Card.Content>
         <Card.Actions style={styles.cardAction}>
           <TouchableOpacity
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 7,
     padding: 10,
-    paddingBottom: 2,
     width: item_width,
   },
   titleCard: {
