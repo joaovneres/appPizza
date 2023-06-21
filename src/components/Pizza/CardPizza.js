@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { Card } from "react-native-paper";
-import { update } from "../../services/connectionFirebase";
 import DeletePizza from "./DeletePizza";
 import SavePizza from "./SavePizza";
 
@@ -15,18 +14,13 @@ export default function CardPizza({ data, deleteItem, editItem, setStatus }) {
     setOpen(false);
   };
 
-  const handleUpdatePizza = (newPizza, id) => {
-    update(id, newPizza, 'pizzas');
-    handleCloseModal();
-  };
-
   return (
     <>
       <Card style={styles.container}>
         <Card.Title title={data.flavor} titleStyle={styles.titleCard} />
         <Card.Cover source={{ uri: data.image }} style={styles.image} />
         <Card.Content>
-          <Text style={styles.textPrice}>R$ {data.price}</Text>
+          <Text style={styles.textPrice}>{data.price}</Text>
           <Text style={styles.textCard}><Text>Ingredientes:</Text> {data.ingredients}</Text>
         </Card.Content>
         <Card.Actions style={styles.cardAction}>
@@ -54,7 +48,7 @@ export default function CardPizza({ data, deleteItem, editItem, setStatus }) {
       <SavePizza
         open={open}
         onClose={handleCloseModal}
-        onUpdatePizza={handleUpdatePizza}
+        onUpdatePizza={editItem}
         pizza={data}
       />
     </>
@@ -64,7 +58,7 @@ export default function CardPizza({ data, deleteItem, editItem, setStatus }) {
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-    marginVertical: 7,
+    marginVertical: 15,
     padding: 10,
     width: item_width,
   },

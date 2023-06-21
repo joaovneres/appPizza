@@ -1,14 +1,24 @@
 import { useRef, useState } from "react";
-import { View, Text, TouchableOpacity, SafeAreaView, TextInput, StyleSheet } from "react-native";
+import {
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  TextInput,
+  StyleSheet,
+  View,
+} from "react-native";
 import { create } from "../services/connectionFirebase";
+import { useNavigation } from "@react-navigation/native";
+import { Picker } from "@react-native-picker/picker"; // Importando o Picker correto
+
 export default function Save() {
+  const navigation = useNavigation();
   const [flavor, setFlavor] = useState("");
   const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
   const [ingredients, setIngredients] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState("R$ ");
   const inputRef = useRef(null);
-
 
   const handleRegisterPizza = () => {
     const newPizza = {
@@ -16,50 +26,60 @@ export default function Save() {
       image,
       category,
       ingredients,
-      price
+      price,
     };
-    create("pizzas", newPizza)
-    setFlavor('');
-    setImage('');
-    setCategory('');
-    setIngredients('');
-    setPrice('');
+    if (create("pizzas", newPizza)) {
+      setFlavor("");
+      setImage("");
+      setCategory("");
+      setIngredients("");
+      setPrice("R$ ");
+      alert("Pizza adicionada ao cardápio.");
+      navigation.navigate("Pizzas");
+    } else {
+      alert("Erro ao adicionar pizza.");
+    }
   };
+
   return (
     <SafeAreaView style={style.container}>
-      <Text style={style.textTitle}>
-        Cadastrar pizza
-      </Text>
+      <Text style={style.textTitle}>Cadastrar pizza</Text>
       <TextInput
-        placeholder='Sabor'
+        placeholder="Sabor"
         style={style.input}
         value={flavor}
         onChangeText={(text) => setFlavor(text)}
         ref={inputRef}
       />
       <TextInput
-        placeholder='Ingredientes'
+        placeholder="Ingredientes"
         style={style.input}
         value={ingredients}
         onChangeText={(text) => setIngredients(text)}
         ref={inputRef}
       />
+      <View style={style.conjunInput}>
+        <TextInput
+          placeholder="Preço"
+          style={[style.input, { width: "37%" }]}
+          value={price}
+          onChangeText={(text) => setPrice(text)}
+          ref={inputRef}
+        />
+        <View style={[style.pickerContainer, { width: "42%" }]}>
+          <Picker
+            style={style.picker}
+            selectedValue={category}
+            onValueChange={(itemValue) => setCategory(itemValue)}
+          >
+            <Picker.Item label="Tipo" value="" />
+            <Picker.Item label="Salgada" value="salgada" />
+            <Picker.Item label="Doce" value="doce" />
+          </Picker>
+        </View>
+      </View>
       <TextInput
-        placeholder='Preço'
-        style={style.input}
-        value={price}
-        onChangeText={(text) => setPrice(text)}
-        ref={inputRef}
-      />
-      <TextInput
-        placeholder='Categoria'
-        style={style.input}
-        value={category}
-        onChangeText={(text) => setCategory(text)}
-        ref={inputRef}
-      />
-      <TextInput
-        placeholder='Imagem'
+        placeholder="Imagem"
         style={style.input}
         value={image}
         onChangeText={(text) => setImage(text)}
@@ -72,7 +92,6 @@ export default function Save() {
   );
 }
 
-
 const style = StyleSheet.create({
   container: {
     flex: 1,
@@ -84,7 +103,7 @@ const style = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     textAlign: "center",
-    alignSelf: 'center',
+    alignSelf: "center",
     color: "#080303",
     marginBottom: 10,
     marginTop: 20,
@@ -93,19 +112,17 @@ const style = StyleSheet.create({
     marginTop: 7,
     marginBottom: 3,
     marginHorizontal: 5,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 100,
     height: 50,
     width: 335,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#141414',
-    flexDirection: 'row',
-    maxHeight: 300,
-    maxWidth: 300,
+    borderColor: "#141414",
+    flexDirection: "row",
   },
   conjunInput: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   button: {
     backgroundColor: "#E85333",
@@ -125,12 +142,12 @@ const style = StyleSheet.create({
     color: "#080303",
     fontWeight: "bold",
     fontSize: 18,
-    marginVertical: 2
+    marginVertical: 2,
   },
   buttonTextModal: {
     color: "#FFF",
     fontSize: 17,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   cardButton: {
     width: "47%",
@@ -140,4 +157,20 @@ const style = StyleSheet.create({
     marginHorizontal: "1%",
     alignItems: "center",
   },
-})
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: "#141414",
+    borderRadius: 100,
+    overflow: "hidden",
+    marginTop: 7,
+    marginHorizontal: 5,
+    justifyContent: "center",
+  },
+  picker: {
+    height: 50,
+    width: 335,
+    backgroundColor: "#fff",
+    padding: 10,
+    width: "100%",
+  },
+});
